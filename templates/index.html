@@ -3,39 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Calculator</title>
+    <title>Enhanced Calculator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <div class="calculator">
-        <div class="display">
-            <input type="text" id="display" readonly>
-            <div id="result" class="result"></div>
+    <div class="calculator-container">
+        <div class="calculator">
+            <div class="display">
+                <input type="text" id="display" readonly>
+                <div id="result" class="result"></div>
+            </div>
+            
+            <!-- Mode toggle buttons -->
+            <div class="mode-toggle">
+                <button id="standard-mode" class="mode-active">Standard</button>
+                <button id="scientific-mode">Scientific</button>
+                <button id="unit-mode">Unit Conv</button>
+            </div>
+            
+            <!-- Standard calculator buttons -->
+            <div id="standard-buttons" class="buttons">
+                <button class="clear" onclick="clearDisplay()">C</button>
+                <button class="operator" onclick="appendToDisplay('(')">(</button>
+                <button class="operator" onclick="appendToDisplay(')')">)</button>
+                <button class="operator" onclick="appendToDisplay('/')">/</button>
+                
+                <button onclick="appendToDisplay('7')">7</button>
+                <button onclick="appendToDisplay('8')">8</button>
+                <button onclick="appendToDisplay('9')">9</button>
+                <button class="operator" onclick="appendToDisplay('*')">×</button>
+                
+                <button onclick="appendToDisplay('4')">4</button>
+                <button onclick="appendToDisplay('5')">5</button>
+                <button onclick="appendToDisplay('6')">6</button>
+                <button class="operator" onclick="appendToDisplay('-')">-</button>
+                
+                <button onclick="appendToDisplay('1')">1</button>
+                <button onclick="appendToDisplay('2')">2</button>
+                <button onclick="appendToDisplay('3')">3</button>
+                <button class="operator" onclick="appendToDisplay('+')">+</button>
+                
+                <button onclick="appendToDisplay('0')">0</button>
+                <button onclick="appendToDisplay('.')">.</button>
+                <button class="operator" onclick="appendToDisplay('%')">%</button>
+                <button class="equals" onclick="calculate()">=</button>
+            </div>
+            
+            <!-- Scientific calculator buttons (hidden by default) -->
+            <div id="scientific-buttons" class="buttons scientific-buttons" style="display: none;">
+                <button class="clear" onclick="clearDisplay()">C</button>
+                <button class="operator" onclick="appendToDisplay('(')">(</button>
+                <button class="operator" onclick="appendToDisplay(')')">)</button>
+                <button class="operator" onclick="appendToDisplay('/')">/</button>
+                
+                <button class="function" onclick="appendToDisplay('sin(')">sin</button>
+                <button class="function" onclick="appendToDisplay('cos(')">cos</button>
+                <button class="function" onclick="appendToDisplay('tan(')">tan</button>
+                <button class="operator" onclick="appendToDisplay('*')">×</button>
+                
+                <button class="function" onclick="appendToDisplay('log(')">log</button>
+                <button class="function" onclick="appendToDisplay('ln(')">ln</button>
+                <button class="function" onclick="appendToDisplay('sqrt(')">√</button>
+                <button class="operator" onclick="appendToDisplay('-')">-</button>
+                
+                <button class="function" onclick="appendToDisplay('PI')">π</button>
+                <button class="function" onclick="appendToDisplay('E')">e</button>
+                <button class="operator" onclick="appendToDisplay('^')">^</button>
+                <button class="operator" onclick="appendToDisplay('+')">+</button>
+                
+                <button onclick="appendToDisplay('0')">0</button>
+                <button onclick="appendToDisplay('.')">.</button>
+                <button class="operator" onclick="appendToDisplay('%')">%</button>
+                <button class="equals" onclick="calculate()">=</button>
+            </div>
+            
+            <!-- Unit conversion interface (hidden by default) -->
+            <div id="unit-converter" class="unit-converter" style="display: none;">
+                <div class="unit-input">
+                    <input type="number" id="unit-value" placeholder="Enter value">
+                </div>
+                <div class="unit-selectors">
+                    <select id="from-unit">
+                        <optgroup label="Length">
+                            <option value="mm">Millimeter (mm)</option>
+                            <option value="cm">Centimeter (cm)</option>
+                            <option value="m">Meter (m)</option>
+                            <option value="km">Kilometer (km)</option>
+                            <option value="in">Inch (in)</option>
+                            <option value="ft">Foot (ft)</option>
+                            <option value="yd">Yard (yd)</option>
+                            <option value="mi">Mile (mi)</option>
+                        </optgroup>
+                        <optgroup label="Weight">
+                            <option value="mg">Milligram (mg)</option>
+                            <option value="g">Gram (g)</option>
+                            <option value="kg">Kilogram (kg)</option>
+                            <option value="oz">Ounce (oz)</option>
+                            <option value="lb">Pound (lb)</option>
+                            <option value="t">Ton (t)</option>
+                        </optgroup>
+                        <optgroup label="Volume">
+                            <option value="ml">Milliliter (ml)</option>
+                            <option value="l">Liter (l)</option>
+                            <option value="gal">Gallon (gal)</option>
+                            <option value="pt">Pint (pt)</option>
+                            <option value="qt">Quart (qt)</option>
+                        </optgroup>
+                        <optgroup label="Temperature">
+                            <option value="c">Celsius (°C)</option>
+                            <option value="f">Fahrenheit (°F)</option>
+                            <option value="k">Kelvin (K)</option>
+                        </optgroup>
+                    </select>
+                    <div class="to-label">to</div>
+                    <select id="to-unit">
+                        <optgroup label="Length">
+                            <option value="mm">Millimeter (mm)</option>
+                            <option value="cm">Centimeter (cm)</option>
+                            <option value="m">Meter (m)</option>
+                            <option value="km">Kilometer (km)</option>
+                            <option value="in">Inch (in)</option>
+                            <option value="ft">Foot (ft)</option>
+                            <option value="yd">Yard (yd)</option>
+                            <option value="mi">Mile (mi)</option>
+                        </optgroup>
+                        <optgroup label="Weight">
+                            <option value="mg">Milligram (mg)</option>
+                            <option value="g">Gram (g)</option>
+                            <option value="kg">Kilogram (kg)</option>
+                            <option value="oz">Ounce (oz)</option>
+                            <option value="lb">Pound (lb)</option>
+                            <option value="t">Ton (t)</option>
+                        </optgroup>
+                        <optgroup label="Volume">
+                            <option value="ml">Milliliter (ml)</option>
+                            <option value="l">Liter (l)</option>
+                            <option value="gal">Gallon (gal)</option>
+                            <option value="pt">Pint (pt)</option>
+                            <option value="qt">Quart (qt)</option>
+                        </optgroup>
+                        <optgroup label="Temperature">
+                            <option value="c">Celsius (°C)</option>
+                            <option value="f">Fahrenheit (°F)</option>
+                            <option value="k">Kelvin (K)</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <button class="convert-button" onclick="convertUnit()">Convert</button>
+                <div id="conversion-result" class="conversion-result"></div>
+            </div>
         </div>
-        <div class="buttons">
-            <button class="clear" onclick="clearDisplay()">C</button>
-            <button class="operator" onclick="appendToDisplay('(')">(</button>
-            <button class="operator" onclick="appendToDisplay(')')">)</button>
-            <button class="operator" onclick="appendToDisplay('/')">/</button>
-            
-            <button onclick="appendToDisplay('7')">7</button>
-            <button onclick="appendToDisplay('8')">8</button>
-            <button onclick="appendToDisplay('9')">9</button>
-            <button class="operator" onclick="appendToDisplay('*')">×</button>
-            
-            <button onclick="appendToDisplay('4')">4</button>
-            <button onclick="appendToDisplay('5')">5</button>
-            <button onclick="appendToDisplay('6')">6</button>
-            <button class="operator" onclick="appendToDisplay('-')">-</button>
-            
-            <button onclick="appendToDisplay('1')">1</button>
-            <button onclick="appendToDisplay('2')">2</button>
-            <button onclick="appendToDisplay('3')">3</button>
-            <button class="operator" onclick="appendToDisplay('+')">+</button>
-            
-            <button onclick="appendToDisplay('0')">0</button>
-            <button onclick="appendToDisplay('.')">.</button>
-            <button class="equals" onclick="calculate()">=</button>
+        
+        <!-- Theme selector -->
+        <div class="theme-selector">
+            <label for="theme-select">Theme:</label>
+            <select id="theme-select" onchange="changeTheme()">
+                <option value="default">Default</option>
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+                <option value="colorful">Colorful</option>
+            </select>
+        </div>
+        
+        <!-- Calculation history -->
+        <div class="history-container">
+            <div class="history-header">
+                <h3>History</h3>
+                <button class="clear-history" onclick="clearHistory()">Clear</button>
+            </div>
+            <div id="history-list" class="history-list">
+                {% for entry in history %}
+                <div class="history-item" onclick="loadFromHistory('{{ entry.expression }}', '{{ entry.result }}')">
+                    <div class="history-expression">{{ entry.expression }}</div>
+                    <div class="history-result">= {{ entry.result }}</div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
