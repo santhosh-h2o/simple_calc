@@ -42,6 +42,9 @@ async function calculate() {
     if (!expression) return;
     
     try {
+        // Show loading indicator
+        resultDisplay.textContent = 'Calculating...';
+        
         const response = await fetch('/calculate', {
             method: 'POST',
             headers: {
@@ -54,9 +57,54 @@ async function calculate() {
         
         if (data.error) {
             resultDisplay.textContent = 'Error: ' + data.error;
+        } else if (data.job_id) {
+            // If we got a job ID, poll for results
+            pollJobResult(data.job_id, expression);
         } else {
             display.value = data.result;
             resultDisplay.textContent = expression + ' =';
+            
+            // Show cached indicator if result was from cache
+            if (data.cached) {
+                const cachedIndicator = document.createElement('span');
+                cachedIndicator.textContent = ' (cached)';
+                cachedIndicator.style.fontSize = '0.8em';
+                cachedIndicator.style.opacity = '0.7';
+                resultDisplay.appendChild(cachedIndicator);
+                
+                // Fade out the cached indicator after 2 seconds
+                setTimeout(() => {
+                    cachedIndicator.style.transition = 'opacity 1s';
+                    cachedIndicator.style.opacity = '0';
+                }, 2000);
+            }
+        }
+    } catch (error) {
+        resultDisplay.textContent = 'Error: ' + error.message;
+    }
+}
+
+async function pollJobResult(jobId, expression, attempts = 0) {
+    if (attempts > 20) { // Limit polling attempts
+        resultDisplay.textContent = 'Calculation taking too long. Please try again.';
+        return;
+    }
+    
+    try {
+        const response = await fetch(`/job/${jobId}`);
+        const data = await response.json();
+        
+        if (data.error) {
+            resultDisplay.textContent = 'Error: ' + data.error;
+        } else if (data.status === 'completed') {
+            display.value = data.result;
+            resultDisplay.textContent = expression + ' =';
+        } else {
+            // Update loading indicator to show progress
+            resultDisplay.textContent = `Calculating${'.'.repeat((attempts % 3) + 1)}`;
+            
+            // Poll again after a delay
+            setTimeout(() => pollJobResult(jobId, expression, attempts + 1), 500);
         }
     } catch (error) {
         resultDisplay.textContent = 'Error: ' + error.message;
