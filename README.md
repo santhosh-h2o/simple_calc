@@ -1,69 +1,44 @@
-# Simple Calculator App
+# Enhanced Calculator
 
-A clean, responsive calculator web application built with Python (Flask) for the backend and vanilla JavaScript, HTML, and CSS for the frontend.
+A feature-rich web calculator built with Flask and JavaScript.
 
 ## Features
-- Basic arithmetic operations (+, -, *, /)
+
+### Standard Calculator
+- Basic arithmetic operations (addition, subtraction, multiplication, division)
+- Percentage calculations
 - Parentheses for complex expressions
 - Keyboard support
-- Responsive design
-- Clean, modern UI with smooth animations
 
-## Prerequisites
-- Python 3.7+
-- pip (Python package manager)
+### Scientific Calculator
+- Trigonometric functions (sin, cos, tan)
+- Logarithmic functions (log, ln)
+- Square root function
+- Constants (π, e)
+- Exponentiation
+
+### Unit Converter
+- Length conversions (mm, cm, m, km, in, ft, yd, mi)
+- Weight conversions (mg, g, kg, oz, lb, t)
+- Volume conversions (ml, l, gal, pt, qt)
+- Temperature conversions (°C, °F, K)
+
+### Additional Features
+- Calculation history with recall functionality
+- Multiple themes (Default, Dark, Light, Colorful)
+- Bracket highlighting for complex expressions
+- Responsive design for mobile and desktop
 
 ## Installation
 
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd github_agent
-   ```
-
-2. Create a virtual environment (optional but recommended):
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   ```
-
-3. Install the required packages:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-## Running the Application
-
-1. Start the Flask development server:
-   ```bash
-   python app.py
-   ```
-
-2. Open your web browser and navigate to:
-   ```
-   http://127.0.0.1:5000/
-   ```
+1. Clone the repository
+2. Install dependencies: `pip install -r requirements.txt`
+3. Run the application: `python app.py`
+4. Open your browser and navigate to `http://localhost:5000`
 
 ## Usage
-- Click the buttons or use your keyboard to input numbers and operators
-- Press `=` or `Enter` to calculate the result
-- Press `C` or `Escape` to clear the display
-- Use `Backspace` to delete the last character
 
-## Project Structure
-```
-github_agent/
-├── app.py                # Flask application
-├── requirements.txt      # Python dependencies
-├── static/               # Static files (CSS, JS, images)
-│   ├── css/
-│   │   └── style.css    # Stylesheet
-│   └── js/
-│       └── script.js    # Client-side JavaScript
-├── templates/
-│   └── index.html       # Main HTML template
-└── README.md            # This file
-```
-
-## License
-This project is open source and available under the MIT License.
+- Switch between calculator modes using the mode toggle buttons
+- Use the keyboard for faster input in calculator modes
+- Access calculation history on the right side
+- Change themes using the theme selector dropdown
