@@ -1,69 +1,29 @@
-# Simple Calculator App
+# React Calculator with Glassmorphism UI
 
-A clean, responsive calculator web application built with Python (Flask) for the backend and vanilla JavaScript, HTML, and CSS for the frontend.
+A modern calculator application built with React and styled with Tailwind CSS, featuring a sleek glassmorphism UI design.
 
 ## Features
-- Basic arithmetic operations (+, -, *, /)
-- Parentheses for complex expressions
+
+- Clean, modern glassmorphism design
+- Basic arithmetic operations
+- Responsive layout
 - Keyboard support
-- Responsive design
-- Clean, modern UI with smooth animations
 
-## Prerequisites
-- Python 3.7+
-- pip (Python package manager)
+## Getting Started
 
-## Installation
+### Prerequisites
 
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd github_agent
-   ```
+- Node.js (v14 or later)
+- npm or yarn
 
-2. Create a virtual environment (optional but recommended):
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   ```
+### Installation
 
-3. Install the required packages:
-   ```bash
-   pip install -r requirements.txt
-   ```
+1. Clone the repository
+2. Install dependencies: `npm install` or `yarn install`
+3. Start the development server: `npm start` or `yarn start`
 
-## Running the Application
+## Technologies Used
 
-1. Start the Flask development server:
-   ```bash
-   python app.py
-   ```
-
-2. Open your web browser and navigate to:
-   ```
-   http://127.0.0.1:5000/
-   ```
-
-## Usage
-- Click the buttons or use your keyboard to input numbers and operators
-- Press `=` or `Enter` to calculate the result
-- Press `C` or `Escape` to clear the display
-- Use `Backspace` to delete the last character
-
-## Project Structure
-```
-github_agent/
-├── app.py                # Flask application
-├── requirements.txt      # Python dependencies
-├── static/               # Static files (CSS, JS, images)
-│   ├── css/
-│   │   └── style.css    # Stylesheet
-│   └── js/
-│       └── script.js    # Client-side JavaScript
-├── templates/
-│   └── index.html       # Main HTML template
-└── README.md            # This file
-```
-
-## License
-This project is open source and available under the MIT License.
+- React
+- Tailwind CSS
+- JavaScript
