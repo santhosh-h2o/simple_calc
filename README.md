@@ -3,13 +3,24 @@
 A clean, responsive calculator web application built with Python (Flask) for the backend and vanilla JavaScript, HTML, and CSS for the frontend.
 
 ## Features
+
 - Basic arithmetic operations (+, -, *, /)
 - Parentheses for complex expressions
-- Keyboard support
-- Responsive design
+- Keyboard support for easy input
+- Responsive design for all device sizes
 - Clean, modern UI with smooth animations
+- Error handling for invalid expressions
+
+## Screenshots
+
+![Calculator Screenshot](https://via.placeholder.com/500x300?text=Calculator+Screenshot)
+
+## Live Demo
+
+[Try the calculator online](#) (Coming soon)
 
 ## Prerequisites
+
 - Python 3.7+
 - pip (Python package manager)
 
@@ -17,8 +28,8 @@ A clean, responsive calculator web application built with Python (Flask) for the
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd github_agent
+   git clone https://github.com/santhosh-h2o/simple_calc.git
+   cd simple_calc
    ```
 
 2. Create a virtual environment (optional but recommended):
@@ -45,14 +56,24 @@ A clean, responsive calculator web application built with Python (Flask) for the
    ```
 
 ## Usage
+
 - Click the buttons or use your keyboard to input numbers and operators
 - Press `=` or `Enter` to calculate the result
 - Press `C` or `Escape` to clear the display
 - Use `Backspace` to delete the last character
 
+## Error Handling
+
+The calculator includes robust error handling for:
+- Invalid expressions
+- Division by zero
+- Syntax errors
+- Security protections against code injection
+
 ## Project Structure
+
 ```
-github_agent/
+simple_calc/
 ├── app.py                # Flask application
 ├── requirements.txt      # Python dependencies
 ├── static/               # Static files (CSS, JS, images)
@@ -65,5 +86,10 @@ github_agent/
 └── README.md            # This file
 ```
 
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
 ## License
+
 This project is open source and available under the MIT License.
